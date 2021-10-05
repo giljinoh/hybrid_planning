@@ -87,9 +87,10 @@ def main(arr):
     summ = 0
     for i in range(p_params.S_length-1):
         temp = d[i] / b[i+1]
+        #temp =  fx / (p_params.S_length-1)
         summ += temp
         t.append(temp)
-    print(t, summ)
+    print(summ)
     # t = fx / p_params.S_length * 0.58
     # CS_t = CS_t/p_params.S_length
 
@@ -140,6 +141,27 @@ def main(arr):
                                      lambda event: [exit(0) if event.key == 'escape' else None])
         plt.grid(True)
         plt.axis("equal")
+        plt.plot(X, Y, '-r', label='python')
+        # plt.plot(X_c, Y_c, '-g', label="C ")
+        plt.xlabel('x axis')
+        plt.ylabel('y axis')
+        plt.title('total error ' + str(err))
+
+        #print("max", temp)
+
+        plt.plot(S[1::2], S[0::2], '-b', label="fixed path")
+        plt.legend(loc='upper right')
+        # line, = plt.plot([],[], 'bo')
+        # def update(frame):
+
+        #     # X.append(S[frame])
+        #     # Y.append(S[frame+1])
+        #     X.append(math.cos(the[frame]) * dis[frame])
+        #     Y.append(math.sin(the[frame]) * dis[frame])
+        #     line.set_data(X,Y)
+        #     return line,
+
+        # ani = FuncAnimation(fig,update,frames=range(0,p_params.S_length,2), interval=50)
         plot_arrow(S[1],S[0],  the[0])
         plot_arrow( S[-1],S[-2], the[-1])
         plot_arrow( S[p_params.State_size*(i)+1],S[p_params.State_size*(i)], the[i])
@@ -152,27 +174,7 @@ def main(arr):
     # for i in range(len(X)):
     #     err += math.sqrt((X_c[i]-X[i])**2 + (Y_c[i]-Y[i])**2)
     #     temp = max(temp, math.sqrt((X_c[i]-X[i])**2 + (Y_c[i]-Y[i])**2))
-    plt.plot(X, Y, '-r',label='python')
-    # plt.plot(X_c, Y_c, '-g', label="C ")
-    plt.xlabel('x axis')
-    plt.ylabel('y axis')
-    plt.title('total error '+str(err))
-    
-    print("max", temp)
 
-    plt.plot(S[1::2],S[0::2], '-b', label="fixed path")
-    plt.legend(loc='upper right')
-    # line, = plt.plot([],[], 'bo')
-    # def update(frame):
-        
-    #     # X.append(S[frame])
-    #     # Y.append(S[frame+1])
-    #     X.append(math.cos(the[frame]) * dis[frame])
-    #     Y.append(math.sin(the[frame]) * dis[frame])
-    #     line.set_data(X,Y)
-    #     return line,
-
-    # ani = FuncAnimation(fig,update,frames=range(0,p_params.S_length,2), interval=50)
     plt.show()
 
     # for i in S:
