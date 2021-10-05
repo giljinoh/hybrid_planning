@@ -1055,8 +1055,9 @@ def main(obstacle_number = 0):
             draw_circle = plt.Circle((s_path_arr[i][0], s_path_arr[i][1]), rad_list[i], fill=False)
             plt.gcf().gca().add_artist(draw_circle)
         plt.pause(0.001)
-        plt.show()
         test_MTSOS.main(arr)
+        plt.show()
+
 
 
 if __name__ == '__main__':

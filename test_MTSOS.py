@@ -115,8 +115,8 @@ def main(arr):
     # ax.set_xlim(0,1)
     # ax.set_ylim(0,1)
 
-    X = [S[0]]
-    Y = [S[1]]
+    Y = [S[0]]
+    X = [S[1]]
     # X_c = [S[0]]
     # Y_c = [S[1]]
     for i in range(1,p_params.S_length-1):
@@ -128,16 +128,21 @@ def main(arr):
     temp = 0
 
     # if show_animation:  # pragma: no cover
-    for i, _ in enumerate(b):
+    for i in range(len(S)):
+        S[i] = (S[i] * 100.0)
+    for i in range(len(X)):
+        X[i] = (X[i] * 100.0)
+        Y[i] = (Y[i] * 100.0)
+    for i, _ in enumerate(the):
         plt.cla()
         # for stopping simulation with the esc key.
         plt.gcf().canvas.mpl_connect('key_release_event',
                                      lambda event: [exit(0) if event.key == 'escape' else None])
         plt.grid(True)
         plt.axis("equal")
-        plot_arrow(S[1]*100,S[0]*100,  the[0])
-        plot_arrow( S[-1]*100,S[-2]*100, the[-1])
-        plot_arrow( S[p_params.State_size*(i+1)+1]*100,S[p_params.State_size*(i+1)]*100, the[i+1])
+        plot_arrow(S[1],S[0],  the[0])
+        plot_arrow( S[-1],S[-2], the[-1])
+        plot_arrow( S[p_params.State_size*(i)+1],S[p_params.State_size*(i)], the[i])
         # plt.title("Time[s]:" + str(time[i])[0:4] +
         #           " v[m/s]:" + str(rv[i])[0:4] +
         #           " a[m/ss]:" + str(ra[i])[0:4] +
@@ -147,7 +152,7 @@ def main(arr):
     # for i in range(len(X)):
     #     err += math.sqrt((X_c[i]-X[i])**2 + (Y_c[i]-Y[i])**2)
     #     temp = max(temp, math.sqrt((X_c[i]-X[i])**2 + (Y_c[i]-Y[i])**2))
-    plt.plot(Y, X, '-r',label='python')
+    plt.plot(X, Y, '-r',label='python')
     # plt.plot(X_c, Y_c, '-g', label="C ")
     plt.xlabel('x axis')
     plt.ylabel('y axis')
@@ -155,7 +160,7 @@ def main(arr):
     
     print("max", temp)
 
-    plt.plot( S[1::2],S[0::2], '-b', label="fixed path")
+    plt.plot(S[1::2],S[0::2], '-b', label="fixed path")
     plt.legend(loc='upper right')
     # line, = plt.plot([],[], 'bo')
     # def update(frame):
